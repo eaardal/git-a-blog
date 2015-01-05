@@ -12,7 +12,14 @@
     </head>
     <body>
         <div>
-              <h1>hello</h1>
+            <h3>Success? @Model.PollResult.Success</h3>
+            <h3>IsNewCommit? @Model.PollResult.IsNewCommit</h3>
+            <h3>PushedTimestamp? @Model.PollResult.PushedTimestamp</h3>
+            <h3>Sha @Model.PollResult.Sha</h3>
+            @foreach (var file in @Model.PollResult.MarkdownFiles)
+            {
+                <span>@Html.Raw(@file)</span>
+            }
         </div>
     </body>
 </html>

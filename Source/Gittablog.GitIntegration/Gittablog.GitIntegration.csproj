@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{126AE275-EB3F-4B98-9E4D-30EFB25FD3B7}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{8650D65B-3C07-47B2-AF4B-885A999DE066}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Gittablog.ConsoleClient</RootNamespace>
-    <AssemblyName>Gittablog.ConsoleClient</AssemblyName>
+    <RootNamespace>Gittablog.GitIntegration</RootNamespace>
+    <AssemblyName>Gittablog.GitIntegration</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -48,18 +46,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="FileDownloader.cs" />
+    <Compile Include="GitHubPoller.cs" />
+    <Compile Include="IPollResult.cs" />
+    <Compile Include="MarkdownUtil.cs" />
+    <Compile Include="PollResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Gittablog.GitIntegration\Gittablog.GitIntegration.csproj">
-      <Project>{8650D65B-3C07-47B2-AF4B-885A999DE066}</Project>
-      <Name>Gittablog.GitIntegration</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
