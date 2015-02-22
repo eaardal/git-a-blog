@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Gitablog.BlogContentProcessor.Models;
+using Gitablog.BlogContentProcessor.Utils;
 
 namespace Gitablog.BlogContentProcessor
 {
@@ -15,10 +17,10 @@ namespace Gitablog.BlogContentProcessor
             _markdownUtil = markdownUtil;
         }
 
-        public async Task<IEnumerable<BlogEntry>> ProcessRawContent(IEnumerable<RawContent> rawContents)
+        public async Task<IEnumerable<BlogEntry>> Process(IEnumerable<RawMarkdownContent> rawContents)
         {
             return await
-                Task.Run(() => rawContents.Select(r => _markdownUtil.Convert(r.RawFileContent))
+                Task.Run(() => rawContents.Select(r => _markdownUtil.ParseToHtml(r.Content))
                     .Select(markdownContent => new BlogEntry {RawHtml = markdownContent}));
         }
     }

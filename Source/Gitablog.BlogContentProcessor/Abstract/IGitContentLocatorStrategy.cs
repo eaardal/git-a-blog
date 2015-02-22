@@ -2,8 +2,8 @@ using System.Threading.Tasks;
 
 namespace Gitablog.BlogContentProcessor.Abstract
 {
-    public interface IGitPollerStrategy
+    public interface IGitContentLocatorStrategy
     {
-        Task<IPollResult> Poll();
+        Task<IRawContent> LocateContent();
     }
 }

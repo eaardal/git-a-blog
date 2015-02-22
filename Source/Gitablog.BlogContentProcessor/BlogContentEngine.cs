@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Gitablog.BlogContentProcessor.Models;
 
 namespace Gitablog.BlogContentProcessor
 {
@@ -25,11 +26,11 @@ namespace Gitablog.BlogContentProcessor
 
         public async Task<IEnumerable<BlogEntry>> GetBlogContent()
         {
-            var pollResults = await _contentLocator.LocateRawContent();
+            var pollResults = await _contentLocator.Locate();
 
-            var files = await _contentRetriever.ProcessRawContent(pollResults);
+            var rawMarkdownContents = await _contentRetriever.Retrieve(pollResults);
 
-            return await _contentProcessor.ProcessRawContent(files);
+            return await _contentProcessor.Process(rawMarkdownContents);
         }
     }
 }

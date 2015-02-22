@@ -3,7 +3,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Gitablog.BlogContentProcessor.Abstract;
 
-namespace Gitablog.BlogContentProcessor
+namespace Gitablog.BlogContentProcessor.Utils
 {
     public class FileDownloader : IFileDownloader
     {

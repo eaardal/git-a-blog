@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Gitablog.BlogContentProcessor
+namespace Gitablog.BlogContentProcessor.Models
 {
-    public class MarkdownWebFile
+    public class RawMarkdownContent
     {
-        public string Url { get; set; }
+        public string Content { get; set; }
     }
 }

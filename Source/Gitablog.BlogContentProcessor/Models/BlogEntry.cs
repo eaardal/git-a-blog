@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Gitablog.BlogContentProcessor
+namespace Gitablog.BlogContentProcessor.Models
 {
     public class BlogEntry
     {

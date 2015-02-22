@@ -4,18 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Gitablog.BlogContentProcessor.Abstract;
+using Gitablog.BlogContentProcessor.Models;
 using Gitablog.Infrastructure;
 using Octokit;
 
 namespace Gitablog.BlogContentProcessor
 {
-    class GitHubPollerStrategy : IGitPollerStrategy
+    class GitHubContentLocatorStrategy : IGitHubContentLocatorStrategy
     {
         private const string ProductIdentifier = "Gittablog";
         private readonly GitHubRepository _repository;
         private readonly IIoC _ioc;
 
-        public GitHubPollerStrategy(GitHubRepository repository, IIoC ioc)
+        public GitHubContentLocatorStrategy(GitHubRepository repository, IIoC ioc)
         {
             if (repository == null) throw new ArgumentNullException("repository");
             if (ioc == null) throw new ArgumentNullException("ioc");
@@ -23,32 +24,32 @@ namespace Gitablog.BlogContentProcessor
             _ioc = ioc;
         }
 
-        public async Task<IPollResult> Poll()
+        public async Task<IRawContent> LocateContent()
         {
             var github = new GitHubClient(new ProductHeaderValue(ProductIdentifier));
             var repository = await github.Repository.Get(_repository.Owner, _repository.Name);
             var pushedTimestamp = repository.PushedAt;
 
-            var pollResult = _ioc.Resolve<IPollResult>();
+            var rawContent = _ioc.Resolve<IRawContent>();
 
-            if (!pushedTimestamp.HasValue || !IsNewPush(pushedTimestamp)) return pollResult;
+            if (!pushedTimestamp.HasValue || !IsNewPush(pushedTimestamp)) return rawContent;
 
-            SetIsNewCommit(pollResult);
+            SetIsNewCommit(rawContent);
 
-            SetPushedTimestamp(pollResult, pushedTimestamp);
+            SetPushedTimestamp(rawContent, pushedTimestamp);
 
             UpdateLastPushTimestamp(pushedTimestamp);
 
             var lastCommit = await GetLastCommit(_repository.Owner, _repository.Name, github);
-            pollResult.Sha = lastCommit.Sha;
+            rawContent.Identifier = lastCommit.Sha;
 
             var files = lastCommit.Files;
 
-            if (!HasFilesToProcess(files)) return pollResult;
+            if (!HasFilesToProcess(files)) return rawContent;
 
-            pollResult.MarkdownFiles = files.Where(IsMarkdownFile).Select(file => new MarkdownWebFile { Url = file.RawUrl }).ToList();
+            rawContent.MarkdownFiles = files.Where(IsMarkdownFile).Select(file => new RemoteMarkdownFile { Url = file.RawUrl }).ToList();
 
-            return pollResult;
+            return rawContent;
         }
 
         private static bool IsMarkdownFile(GitHubCommitFile file)
@@ -74,16 +75,16 @@ namespace Gitablog.BlogContentProcessor
                 _repository.LastPushedTicks = pushedTimestamp.Value.Ticks;
         }
 
-        private static void SetPushedTimestamp(IPollResult pollResult, DateTimeOffset? pushedTimestamp)
+        private static void SetPushedTimestamp(IRawContent rawContent, DateTimeOffset? pushedTimestamp)
         {
             if (pushedTimestamp.HasValue)
-                pollResult.PushedTimestamp = pushedTimestamp.Value;
+                rawContent.PushedTimestamp = pushedTimestamp.Value;
         }
 
-        private void SetIsNewCommit(IPollResult pollResult)
+        private void SetIsNewCommit(IRawContent rawContent)
         {
             if (_repository.LastPushedTicks != 0)
-                pollResult.IsNewCommit = true;
+                rawContent.IsNewCommit = true;
         }
 
         private bool IsNewPush(DateTimeOffset? lastUpdate)

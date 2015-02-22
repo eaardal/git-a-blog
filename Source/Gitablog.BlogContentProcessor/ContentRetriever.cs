@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Gitablog.BlogContentProcessor.Abstract;
+using Gitablog.BlogContentProcessor.Models;
+using Gitablog.BlogContentProcessor.Utils;
 
 namespace Gitablog.BlogContentProcessor
 {
@@ -21,17 +23,17 @@ namespace Gitablog.BlogContentProcessor
             _markdownUtil = markdownUtil;
         }
 
-        public async Task<IEnumerable<RawContent>> ProcessRawContent(IEnumerable<IPollResult> pollResults)
+        public async Task<IEnumerable<RawMarkdownContent>> Retrieve(IEnumerable<IRawContent> rawContents)
         {
-            var blogEntries = new List<RawContent>();
+            var blogEntries = new List<RawMarkdownContent>();
 
-            foreach (var pollResult in pollResults)
+            foreach (var rawContent in rawContents)
             {
-                foreach (var file in pollResult.MarkdownFiles)
+                foreach (var file in rawContent.MarkdownFiles)
                 {
                     var content = await _fileDownloader.Download(file.Url);
 
-                    blogEntries.Add(new RawContent{ RawFileContent = content });
+                    blogEntries.Add(new RawMarkdownContent{ Content = content });
                 }
             }
 

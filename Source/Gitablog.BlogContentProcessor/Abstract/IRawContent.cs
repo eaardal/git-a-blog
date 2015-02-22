@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using Gitablog.BlogContentProcessor.Models;
 
 namespace Gitablog.BlogContentProcessor.Abstract
 {
-    public interface IPollResult
+    public interface IRawContent
     {
         bool IsNewCommit { get; set; }
         DateTimeOffset? PushedTimestamp { get; set; }
-        string Sha { get; set; }
-        IEnumerable<MarkdownWebFile> MarkdownFiles { get; set; }
+        string Identifier { get; set; }
+        IEnumerable<RemoteMarkdownFile> MarkdownFiles { get; set; }
         bool Success { get; }
     }
 }

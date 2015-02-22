@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Gitablog.BlogContentProcessor;
-using Gitablog.Web.Models;
+using Gitablog.Web.ViewModels;
 
 namespace Gitablog.Web.Controllers
 {
@@ -23,7 +23,9 @@ namespace Gitablog.Web.Controllers
         {
             var blogEntries = await _engine.GetBlogContent();
 
-            return View(blogEntries);
+            var posts = blogEntries.Select(entry => new BlogPost {HtmlContent = entry.RawHtml});
+
+            return View(posts);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Gitablog.BlogContentProcessor.BlogEntry>
+﻿@model IEnumerable<Gitablog.Web.ViewModels.BlogPost>
 @{
     Layout = null;
 }
@@ -11,20 +11,20 @@
 </head>
 <body>
     <div>
-        @foreach (var file in @Model)
+        @foreach (var post in @Model)
         {
-            <span>@Html.Raw(file.RawHtml)</span>
+            <span>@Html.Raw(post.HtmlContent)</span>
         }
 
 
-        @*@if (Model.PollResult != null && Model.PollResult.Success)
+        @*@if (Model.RawContent != null && Model.RawContent.Success)
         {
-            <h3>Success? @Model.PollResult.Success</h3>
-            <h3>IsNewCommit? @Model.PollResult.IsNewCommit</h3>
-            <h3>PushedTimestamp? @Model.PollResult.PushedTimestamp</h3>
-            <h3>Sha @Model.PollResult.Sha</h3>
+            <h3>Success? @Model.RawContent.Success</h3>
+            <h3>IsNewCommit? @Model.RawContent.IsNewCommit</h3>
+            <h3>PushedTimestamp? @Model.RawContent.PushedTimestamp</h3>
+            <h3>Identifier @Model.RawContent.Identifier</h3>
 
-            foreach (var file in @Model.PollResult.MarkdownFiles)
+            foreach (var file in @Model.RawContent.MarkdownFiles)
             {
                 <span>@Html.Raw(@file)</span>
             }

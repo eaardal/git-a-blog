@@ -47,23 +47,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\IFileDownloader.cs" />
-    <Compile Include="Abstract\IGitPollerStrategy.cs" />
-    <Compile Include="Abstract\IPollResult.cs" />
+    <Compile Include="Abstract\IGitContentLocatorStrategy.cs" />
+    <Compile Include="Abstract\IGitHubContentLocatorStrategy.cs" />
+    <Compile Include="Abstract\IRawContent.cs" />
     <Compile Include="Abstract\ITimerPoller.cs" />
     <Compile Include="BlogContentEngine.cs" />
-    <Compile Include="BlogEntry.cs" />
     <Compile Include="ContentProcessor.cs" />
     <Compile Include="ContentRetriever.cs" />
-    <Compile Include="FileDownloader.cs" />
     <Compile Include="ContentLocator.cs" />
-    <Compile Include="GitHubPollerStrategy.cs" />
+    <Compile Include="GitHubContentLocatorStrategy.cs" />
     <Compile Include="GitHubRepository.cs" />
-    <Compile Include="MarkdownUtil.cs" />
-    <Compile Include="MarkdownWebFile.cs" />
-    <Compile Include="PollResult.cs" />
+    <Compile Include="Models\BlogEntry.cs" />
+    <Compile Include="Models\RawContent.cs" />
+    <Compile Include="Models\RawMarkdownContent.cs" />
+    <Compile Include="Models\RemoteMarkdownFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RawContent.cs" />
-    <Compile Include="TempTimerPoller.cs" />
+    <Compile Include="Utils\FileDownloader.cs" />
+    <Compile Include="Utils\MarkdownUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

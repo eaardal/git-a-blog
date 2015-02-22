@@ -7,20 +7,20 @@ namespace Gitablog.BlogContentProcessor
 {
     public class ContentLocator
     {
-        private readonly IGitPollerStrategy _gitHubPollerStrategy;
+        private readonly IGitContentLocatorStrategy _gitHubContentLocatorStrategy;
 
-        public ContentLocator(IGitPollerStrategy gitHubPollerStrategy)
+        public ContentLocator(IGitContentLocatorStrategy gitHubContentLocatorStrategy)
         {
-            if (gitHubPollerStrategy == null) throw new ArgumentNullException("gitHubPollerStrategy");
+            if (gitHubContentLocatorStrategy == null) throw new ArgumentNullException("gitHubContentLocatorStrategy");
 
-            _gitHubPollerStrategy = gitHubPollerStrategy;
+            _gitHubContentLocatorStrategy = gitHubContentLocatorStrategy;
         }
 
-        public async Task<IEnumerable<IPollResult>> LocateRawContent()
+        public async Task<IEnumerable<IRawContent>> Locate()
         {
-            return new List<IPollResult>
+            return new List<IRawContent>
             {
-                await _gitHubPollerStrategy.Poll()
+                await _gitHubContentLocatorStrategy.LocateContent()
             };
         }
     }
