@@ -5,8 +5,10 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Gittablog.GitIntegration;
+using Gittablog.Presentation.Hubs;
 using Gittablog.Presentation.Models;
 using LibGit2Sharp;
+using Microsoft.AspNet.SignalR;
 using Octokit;
 
 namespace Gittablog.Presentation.Controllers
@@ -15,13 +17,26 @@ namespace Gittablog.Presentation.Controllers
     {
         public async Task<ActionResult> Index()
         {
+            var viewModel = new HomeViewModel();
             var github = new GitHubPoller();
+            var hub = new BlogPostHubWrapper();
+            var poller = new TempTimerPoller();
 
-            var pollResult = await github.PollRepository("eaardal", "mdtest", 0);
+            poller.Start(async () =>
+            {
+                var pollResult = await github.PollRepository("eaardal", "mdtest");
 
-            var viewModel = new HomeViewModel {PollResult = pollResult};
-            
-            return View(viewModel);
+                var posts = pollResult.MarkdownFiles.Select(file => new BlogPost { HtmlContent = file });
+
+                foreach (var post in posts)
+                {
+                    hub.BroadcastBlogPost(post);
+                }
+
+            }, 10000);
+
+      
+            return View();
         }
     }
 }

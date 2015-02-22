@@ -13,7 +13,7 @@ namespace Gittablog.GitIntegration
         private const string ProductIdentifier = "Gittablog";
         private long _lastPushedTicks;
 
-        public async Task<IPollResult> PollRepository(string owner, string name, int intervalMilliseconds)
+        public async Task<IPollResult> PollRepository(string owner, string name, int intervalMilliseconds = 60000)
         {
             var github = new GitHubClient(new ProductHeaderValue(ProductIdentifier));
             var repository = await github.Repository.Get(owner, name);

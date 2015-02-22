@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gittablog.ConsoleClient", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gittablog.GitIntegration", "Gittablog.GitIntegration\Gittablog.GitIntegration.csproj", "{8650D65B-3C07-47B2-AF4B-885A999DE066}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalRDemo", "SignalRDemo\SignalRDemo.csproj", "{CDB2A0EB-319C-424E-AB6B-19A5B2B8B51B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{8650D65B-3C07-47B2-AF4B-885A999DE066}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8650D65B-3C07-47B2-AF4B-885A999DE066}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8650D65B-3C07-47B2-AF4B-885A999DE066}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDB2A0EB-319C-424E-AB6B-19A5B2B8B51B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDB2A0EB-319C-424E-AB6B-19A5B2B8B51B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDB2A0EB-319C-424E-AB6B-19A5B2B8B51B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDB2A0EB-319C-424E-AB6B-19A5B2B8B51B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -49,9 +49,11 @@
     <Compile Include="FileDownloader.cs" />
     <Compile Include="GitHubPoller.cs" />
     <Compile Include="IPollResult.cs" />
+    <Compile Include="ITimerPoller.cs" />
     <Compile Include="MarkdownUtil.cs" />
     <Compile Include="PollResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TempTimerPoller.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
