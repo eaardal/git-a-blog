@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gitablog.Web", "Gitablog.We
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gitablog.BlogContentProcessor", "Gitablog.BlogContentProcessor\Gitablog.BlogContentProcessor.csproj", "{B7A93946-0224-4797-9CE0-44255F304489}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gitablog.Infrastructure", "Gitablog.Infrastructure\Gitablog.Infrastructure.csproj", "{660F4F04-B1C4-4240-855F-BA814B128714}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{B7A93946-0224-4797-9CE0-44255F304489}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7A93946-0224-4797-9CE0-44255F304489}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B7A93946-0224-4797-9CE0-44255F304489}.Release|Any CPU.Build.0 = Release|Any CPU
+		{660F4F04-B1C4-4240-855F-BA814B128714}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{660F4F04-B1C4-4240-855F-BA814B128714}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{660F4F04-B1C4-4240-855F-BA814B128714}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{660F4F04-B1C4-4240-855F-BA814B128714}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

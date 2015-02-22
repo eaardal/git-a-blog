@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Gitablog.BlogContentProcessor.Abstract;
 
@@ -7,21 +9,33 @@ namespace Gitablog.BlogContentProcessor
 {
     public class ContentRetriever
     {
-        private readonly IGitPollerStrategy _gitHubPollerStrategy;
+        private readonly IFileDownloader _fileDownloader;
+        private readonly MarkdownUtil _markdownUtil;
 
-        public ContentRetriever(IGitPollerStrategy gitHubPollerStrategy)
+        public ContentRetriever(IFileDownloader fileDownloader, MarkdownUtil markdownUtil)
         {
-            if (gitHubPollerStrategy == null) throw new ArgumentNullException("gitHubPollerStrategy");
+            if (fileDownloader == null) throw new ArgumentNullException("fileDownloader");
+            if (markdownUtil == null) throw new ArgumentNullException("markdownUtil");
 
-            _gitHubPollerStrategy = gitHubPollerStrategy;
+            _fileDownloader = fileDownloader;
+            _markdownUtil = markdownUtil;
         }
 
-        public async Task<IEnumerable<IPollResult>> GetRawContent()
+        public async Task<IEnumerable<RawContent>> ProcessRawContent(IEnumerable<IPollResult> pollResults)
         {
-            return new List<IPollResult>
+            var blogEntries = new List<RawContent>();
+
+            foreach (var pollResult in pollResults)
             {
-                await _gitHubPollerStrategy.Poll()
-            };
+                foreach (var file in pollResult.MarkdownFiles)
+                {
+                    var content = await _fileDownloader.Download(file.Url);
+
+                    blogEntries.Add(new RawContent{ RawFileContent = content });
+                }
+            }
+
+            return blogEntries;
         }
     }
 }

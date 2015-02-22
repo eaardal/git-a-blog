@@ -46,17 +46,33 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\IFileDownloader.cs" />
+    <Compile Include="Abstract\IGitPollerStrategy.cs" />
+    <Compile Include="Abstract\IPollResult.cs" />
+    <Compile Include="Abstract\ITimerPoller.cs" />
+    <Compile Include="BlogContentEngine.cs" />
+    <Compile Include="BlogEntry.cs" />
+    <Compile Include="ContentProcessor.cs" />
+    <Compile Include="ContentRetriever.cs" />
     <Compile Include="FileDownloader.cs" />
-    <Compile Include="GitHubPoller.cs" />
-    <Compile Include="IPollResult.cs" />
-    <Compile Include="ITimerPoller.cs" />
+    <Compile Include="ContentLocator.cs" />
+    <Compile Include="GitHubPollerStrategy.cs" />
+    <Compile Include="GitHubRepository.cs" />
     <Compile Include="MarkdownUtil.cs" />
+    <Compile Include="MarkdownWebFile.cs" />
     <Compile Include="PollResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RawContent.cs" />
     <Compile Include="TempTimerPoller.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Gitablog.Infrastructure\Gitablog.Infrastructure.csproj">
+      <Project>{660F4F04-B1C4-4240-855F-BA814B128714}</Project>
+      <Name>Gitablog.Infrastructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

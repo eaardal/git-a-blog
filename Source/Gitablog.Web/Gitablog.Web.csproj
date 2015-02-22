@@ -38,6 +38,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac">
+      <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mvc">
+      <HintPath>..\packages\Autofac.Mvc5.3.3.3\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -84,6 +90,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\Bootstrapper.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -111,6 +118,10 @@
     <ProjectReference Include="..\Gitablog.BlogContentProcessor\Gitablog.BlogContentProcessor.csproj">
       <Project>{B7A93946-0224-4797-9CE0-44255F304489}</Project>
       <Name>Gitablog.BlogContentProcessor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gitablog.Infrastructure\Gitablog.Infrastructure.csproj">
+      <Project>{660F4F04-B1C4-4240-855F-BA814B128714}</Project>
+      <Name>Gitablog.Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

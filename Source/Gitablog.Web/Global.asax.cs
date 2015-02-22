@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web;
 using System.Web.Routing;
+using Gitablog.Web.App_Start;
 
 namespace Gitablog.Web
 {
-    public class MvcApplication : System.Web.HttpApplication
+    public class MvcApplication : HttpApplication
     {
         protected void Application_Start()
         {
-            AreaRegistration.RegisterAllAreas();
+            Bootstrapper.Wire();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
     }

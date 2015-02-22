@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Web;
+using System.Web.Compilation;
+using System.Web.Mvc;
 using Autofac;
+using Autofac.Integration.Mvc;
 using Gitablog.Infrastructure;
 
 namespace Gitablog.Web.App_Start
@@ -13,8 +16,10 @@ namespace Gitablog.Web.App_Start
         public static IIoC Wire()
         {
             var builder = new ContainerBuilder();
+            
+            var assemblies = BuildManager.GetReferencedAssemblies().Cast<Assembly>().Where(a => a.FullName.Contains("Gitablog"));
 
-            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
+            builder.RegisterAssemblyTypes(assemblies.ToArray())
                 .Except<IoC>()
                 .AsImplementedInterfaces()
                 .AsSelf();
@@ -25,6 +30,8 @@ namespace Gitablog.Web.App_Start
 
             var ioc = container.Resolve<IIoC>();
             ioc.RegisterContainer(container);
+
+            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
 
             return ioc;
         }

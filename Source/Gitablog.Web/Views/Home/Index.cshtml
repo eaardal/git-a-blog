@@ -1,5 +1,4 @@
-﻿@model Gitablog.Web.Models.HomeViewModel
-
+﻿@model IEnumerable<Gitablog.BlogContentProcessor.BlogEntry>
 @{
     Layout = null;
 }
@@ -12,7 +11,13 @@
 </head>
 <body>
     <div>
-        @if (Model.PollResult != null && Model.PollResult.Success)
+        @foreach (var file in @Model)
+        {
+            <span>@Html.Raw(file.RawHtml)</span>
+        }
+
+
+        @*@if (Model.PollResult != null && Model.PollResult.Success)
         {
             <h3>Success? @Model.PollResult.Success</h3>
             <h3>IsNewCommit? @Model.PollResult.IsNewCommit</h3>
@@ -27,7 +32,7 @@
         else
         {
             <h3>No commit to display</h3>
-        }
+        }*@
     </div>
 </body>
 </html>

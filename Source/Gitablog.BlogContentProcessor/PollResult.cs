@@ -10,7 +10,7 @@ namespace Gitablog.BlogContentProcessor
         public bool IsNewCommit { get; set; }
         public DateTimeOffset? PushedTimestamp { get; set; }
         public string Sha { get; set; }
-        public List<string> MarkdownFiles { get; set; }
+        public IEnumerable<MarkdownWebFile> MarkdownFiles { get; set; }
         public bool Success
         {
             get
@@ -21,7 +21,7 @@ namespace Gitablog.BlogContentProcessor
 
         public PollResult()
         {
-            MarkdownFiles = new List<string>();
+            MarkdownFiles = new List<MarkdownWebFile>();
         }
     }
 }

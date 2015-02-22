@@ -11,16 +11,19 @@ namespace Gitablog.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly BlogContentEngine _engine;
+
+        public HomeController(BlogContentEngine engine)
+        {
+            if (engine == null) throw new ArgumentNullException("engine");
+            _engine = engine;
+        }
+
         public async Task<ActionResult> Index()
         {
-            var viewModel = new HomeViewModel();
-            var github = new GitHubPoller();
-            
-            var pollResult = await github.PollRepository("eaardal", "mdtest");
+            var blogEntries = await _engine.GetBlogContent();
 
-            viewModel.PollResult = pollResult;
-
-            return View(viewModel);
+            return View(blogEntries);
         }
     }
 }
