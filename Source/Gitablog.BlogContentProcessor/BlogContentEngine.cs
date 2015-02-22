@@ -26,9 +26,9 @@ namespace Gitablog.BlogContentProcessor
 
         public async Task<IEnumerable<BlogEntry>> GetBlogContent()
         {
-            var pollResults = await _contentLocator.Locate();
+            var rawContents = await _contentLocator.Locate();
 
-            var rawMarkdownContents = await _contentRetriever.Retrieve(pollResults);
+            var rawMarkdownContents = await _contentRetriever.Retrieve(rawContents);
 
             return await _contentProcessor.Process(rawMarkdownContents);
         }
