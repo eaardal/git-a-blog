@@ -8,6 +8,7 @@ namespace Gitablog.BlogContentProcessor.Models
 {
     public class RawMarkdownContent
     {
+        public string FileUrl { get; set; }
         public string Content { get; set; }
     }
 }

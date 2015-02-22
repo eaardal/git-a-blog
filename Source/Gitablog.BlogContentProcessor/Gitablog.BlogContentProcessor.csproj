@@ -52,6 +52,8 @@
     <Compile Include="Abstract\IRawContent.cs" />
     <Compile Include="Abstract\ITimerPoller.cs" />
     <Compile Include="BlogContentEngine.cs" />
+    <Compile Include="BlogContentValidationException.cs" />
+    <Compile Include="BlogLayoutOrganizer.cs" />
     <Compile Include="ContentProcessor.cs" />
     <Compile Include="ContentRetriever.cs" />
     <Compile Include="ContentLocator.cs" />

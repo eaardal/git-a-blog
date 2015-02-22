@@ -26,7 +26,7 @@ namespace Gitablog.BlogContentProcessor
                 {
                     var content = await _fileDownloader.Download(file.Url);
 
-                    blogEntries.Add(new RawMarkdownContent{ Content = content });
+                    blogEntries.Add(new RawMarkdownContent{ Content = content, FileUrl = file.Url});
                 }
             }
 
