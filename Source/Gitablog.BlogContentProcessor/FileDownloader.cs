@@ -1,10 +1,11 @@
 ﻿using System.IO;
 using System.Net;
 using System.Threading.Tasks;
+using Gitablog.BlogContentProcessor.Abstract;
 
 namespace Gitablog.BlogContentProcessor
 {
-    public class FileDownloader
+    public class FileDownloader : IFileDownloader
     {
         public async Task<string> Download(string url)
         {

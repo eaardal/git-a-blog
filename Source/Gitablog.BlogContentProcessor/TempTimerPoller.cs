@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Timers;
+using Gitablog.BlogContentProcessor.Abstract;
 
 namespace Gitablog.BlogContentProcessor
 {

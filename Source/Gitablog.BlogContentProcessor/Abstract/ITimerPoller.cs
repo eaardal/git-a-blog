@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace Gitablog.BlogContentProcessor
+namespace Gitablog.BlogContentProcessor.Abstract
 {
     public interface ITimerPoller
     {

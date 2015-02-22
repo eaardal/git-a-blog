@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Gitablog.BlogContentProcessor.Abstract;
 
 namespace Gitablog.BlogContentProcessor
 {
