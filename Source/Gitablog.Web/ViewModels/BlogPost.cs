@@ -1,7 +1,9 @@
-﻿namespace Gitablog.Web.ViewModels
+﻿using System.Collections.Generic;
+
+namespace Gitablog.Web.ViewModels
 {
     public class BlogPost
     {
-        public string HtmlContent { get; set; }
+        public string RawHtml { get; set; }
     }
 }

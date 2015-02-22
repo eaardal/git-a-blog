@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Gitablog.Web.ViewModels.BlogPost>
+﻿@model IEnumerable<Gitablog.Web.ViewModels.Page>
 @{
     Layout = null;
 }
@@ -11,9 +11,14 @@
 </head>
 <body>
     <div>
-        @foreach (var post in @Model)
+        @foreach (var page in @Model)
         {
-            <span>@Html.Raw(post.HtmlContent)</span>
+            <h1>@page.Name</h1>
+            
+             foreach (var entry in page.BlogPosts)
+             {
+                 <span>@Html.Raw(entry.RawHtml)</span>
+             }
         }
 
 

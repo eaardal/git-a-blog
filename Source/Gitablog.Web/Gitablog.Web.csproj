@@ -98,6 +98,7 @@
     </Compile>
     <Compile Include="ViewModels\BlogPost.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\Page.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />

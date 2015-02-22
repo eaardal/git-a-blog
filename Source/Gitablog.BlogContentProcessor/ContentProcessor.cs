@@ -61,7 +61,7 @@ namespace Gitablog.BlogContentProcessor
                 throw new BlogContentValidationException("Could not parse file name in " + url);
             }
 
-            entry.Category = fileNameElements[0];
+            entry.Category = fileNameElements[0].ToLower();
         }
     }
 }

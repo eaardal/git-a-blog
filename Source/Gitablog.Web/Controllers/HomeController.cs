@@ -21,11 +21,26 @@ namespace Gitablog.Web.Controllers
 
         public async Task<ActionResult> Index()
         {
-            var blogEntries = await _engine.GetBlogContent();
+            var layout = await _engine.GetBlogContent();
 
-            var posts = blogEntries.Select(entry => new BlogPost {HtmlContent = entry.RawHtml});
+            var pages = new List<Page>();
 
-            return View(posts);
+            foreach (var grp in layout)
+            {
+                var page = new Page
+                {
+                    Name = grp.Key
+                };
+
+                foreach (var entry in grp.Value)
+                {
+                    page.BlogPosts.Add(new BlogPost { RawHtml = entry.RawHtml });
+                }
+
+                pages.Add(page);
+            }
+
+            return View(pages);
         }
     }
 }
