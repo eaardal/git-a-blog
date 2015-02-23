@@ -16,14 +16,14 @@ namespace Gitablog.Web.App_Start
         {
             var builder = new ContainerBuilder();
 
-            //var assemblies = BuildManager.GetReferencedAssemblies().Cast<Assembly>().Where(a => a.FullName.Contains("Gitablog"));
-
             var assemblies =
                 Assembly.GetExecutingAssembly()
                     .GetReferencedAssemblies()
                     .Where(a => a.FullName.Contains("Gitablog"))
                     .Select(Assembly.Load)
-                    .ToArray();
+                    .ToList();
+
+            assemblies.Add(Assembly.GetExecutingAssembly());
 
             builder.RegisterAssemblyTypes(assemblies.ToArray())
                 .Except<IoC>()
@@ -32,11 +32,12 @@ namespace Gitablog.Web.App_Start
                 .AsImplementedInterfaces()
                 .AsSelf();
 
-            builder.RegisterType<IoC>().As<IIoC>().SingleInstance();
+            builder.RegisterSingleton<IoC>();
+            builder.RegisterSingleton<StateSynchronizer>();
+            builder.RegisterSingleton<ContentState>();
 
-            builder.RegisterType<StateSynchronizer>().AsSelf().AsImplementedInterfaces().SingleInstance();
-
-            builder.RegisterType<ContentState>().AsSelf().AsImplementedInterfaces().SingleInstance();
+            builder.RegisterType<FluentSchedulerTaskFactory>().AsSelf().AsImplementedInterfaces();
+            builder.RegisterType<FluentSchedulerBootstrapper>().AsSelf().AsImplementedInterfaces();
 
             return builder.Build();
         }

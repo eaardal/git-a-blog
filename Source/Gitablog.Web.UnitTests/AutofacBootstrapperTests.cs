@@ -7,7 +7,9 @@ using Autofac;
 using Gitablog.BlogContentProcessor;
 using Gitablog.BlogContentProcessor.Models;
 using Gitablog.BlogContentProcessor.Utils;
+using Gitablog.Infrastructure;
 using Gitablog.Web.App_Start;
+using Gitablog.Web.Controllers;
 using NUnit.Framework;
 
 namespace Gitablog.Web.UnitTests
@@ -23,6 +25,7 @@ namespace Gitablog.Web.UnitTests
             _container = AutofacBootstrapper.WireDependencies();
         }
 
+        // Gitablog
         [TestCase(typeof(BlogContentEngine))]
         [TestCase(typeof(BlogEntry))]
         [TestCase(typeof(BlogLayoutOrganizer))]
@@ -33,11 +36,14 @@ namespace Gitablog.Web.UnitTests
         [TestCase(typeof(FileDownloader))]
         [TestCase(typeof(GitHubContentLocatorStrategy))]
         [TestCase(typeof(GitHubRepository))]
+        [TestCase(typeof(IoC))]
         [TestCase(typeof(MarkdownUtil))]
         [TestCase(typeof(RawContent))]
         [TestCase(typeof(RawMarkdownContent))]
         [TestCase(typeof(RemoteMarkdownFile))]
         [TestCase(typeof(StateSynchronizer))]
+        // MVC
+        [TestCase(typeof(HomeController))]
         public void ShouldBeRegistered(Type service)
         {
             var registered = _container.Resolve(service);
@@ -46,6 +52,7 @@ namespace Gitablog.Web.UnitTests
 
         [TestCase(typeof(StateSynchronizer))]
         [TestCase(typeof(ContentState))]
+        [TestCase(typeof(IoC))]
         public void ShouldBeSingleton(Type service)
         {
             var resolved1 = _container.Resolve(service);
@@ -75,7 +82,7 @@ namespace Gitablog.Web.UnitTests
             var resolved1 = _container.Resolve(service);
             var resolved2 = _container.Resolve(service);
             var resolved3 = _container.Resolve(service);
-
+            
             Assert.AreNotSame(resolved1, resolved2);
             Assert.AreNotSame(resolved1, resolved3);
             Assert.AreNotSame(resolved2, resolved3);

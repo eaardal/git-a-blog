@@ -10,11 +10,11 @@ namespace Gitablog.Web.App_Start
         public static IIoC ConfigureIoC()
         {
             var container = AutofacBootstrapper.WireDependencies();
+            
+            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
 
             var ioc = container.Resolve<IIoC>();
             ioc.RegisterContainer(container);
-
-            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
 
             return ioc;
         }

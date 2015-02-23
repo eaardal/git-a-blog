@@ -94,6 +94,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\AutofacBootstrapper.cs" />
+    <Compile Include="App_Start\AutofacExtensions.cs" />
     <Compile Include="App_Start\GitablogBootstrapper.cs" />
     <Compile Include="App_Start\FluentSchedulerBootstrapper.cs" />
     <Compile Include="App_Start\FluentSchedulerTaskFactory.cs" />

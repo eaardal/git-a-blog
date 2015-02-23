@@ -14,6 +14,7 @@
         @foreach (var page in @Model.Pages)
         {
             @Html.ActionLink(page.Name, "Category", "Home", new { category = page.Name }, new object())
+            <br/>
         }
     </div>
 </body>

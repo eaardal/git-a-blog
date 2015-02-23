@@ -13,7 +13,6 @@ namespace Gitablog.Web
         {
             var ioc = GitablogBootstrapper.Wire();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-
         }
     }
 }
