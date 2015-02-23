@@ -11,10 +11,9 @@ namespace Gitablog.Web
     {
         protected void Application_Start()
         {
-            var ioc = Bootstrapper.Wire();
+            var ioc = GitablogBootstrapper.Wire();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            TaskManager.TaskFactory = ioc.Resolve<FluentSchedulerTaskFactory>();
-            TaskManager.Initialize(ioc.Resolve<FluentSchedulerBootstrapper>());
+
         }
     }
 }

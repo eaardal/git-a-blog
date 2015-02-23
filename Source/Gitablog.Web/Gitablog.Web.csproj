@@ -93,9 +93,11 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\Bootstrapper.cs" />
+    <Compile Include="App_Start\AutofacBootstrapper.cs" />
+    <Compile Include="App_Start\GitablogBootstrapper.cs" />
     <Compile Include="App_Start\FluentSchedulerBootstrapper.cs" />
     <Compile Include="App_Start\FluentSchedulerTaskFactory.cs" />
+    <Compile Include="App_Start\IoCBootstrapper.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">

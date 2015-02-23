@@ -12,9 +12,9 @@ namespace Gitablog.BlogContentProcessor
 {
     public class ContentProcessor
     {
-        private readonly MarkdownUtil _markdownUtil;
+        private readonly IMarkdownUtil _markdownUtil;
 
-        public ContentProcessor(MarkdownUtil markdownUtil)
+        public ContentProcessor(IMarkdownUtil markdownUtil)
         {
             if (markdownUtil == null) throw new ArgumentNullException("markdownUtil");
             _markdownUtil = markdownUtil;

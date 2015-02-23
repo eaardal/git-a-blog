@@ -4,21 +4,26 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Compilation;
-using System.Web.Mvc;
 using Autofac;
-using Autofac.Integration.Mvc;
 using Gitablog.BlogContentProcessor;
 using Gitablog.Infrastructure;
 
 namespace Gitablog.Web.App_Start
 {
-    public class Bootstrapper
+    public class AutofacBootstrapper
     {
-        public static IIoC Wire()
+        public static IContainer WireDependencies()
         {
             var builder = new ContainerBuilder();
-            
-            var assemblies = BuildManager.GetReferencedAssemblies().Cast<Assembly>().Where(a => a.FullName.Contains("Gitablog"));
+
+            //var assemblies = BuildManager.GetReferencedAssemblies().Cast<Assembly>().Where(a => a.FullName.Contains("Gitablog"));
+
+            var assemblies =
+                Assembly.GetExecutingAssembly()
+                    .GetReferencedAssemblies()
+                    .Where(a => a.FullName.Contains("Gitablog"))
+                    .Select(Assembly.Load)
+                    .ToArray();
 
             builder.RegisterAssemblyTypes(assemblies.ToArray())
                 .Except<IoC>()
@@ -33,14 +38,7 @@ namespace Gitablog.Web.App_Start
 
             builder.RegisterType<ContentState>().AsSelf().AsImplementedInterfaces().SingleInstance();
 
-            var container = builder.Build();
-
-            var ioc = container.Resolve<IIoC>();
-            ioc.RegisterContainer(container);
-
-            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
-
-            return ioc;
+            return builder.Build();
         }
     }
 }

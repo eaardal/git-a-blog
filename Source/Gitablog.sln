@@ -9,6 +9,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gitablog.BlogContentProcess
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gitablog.Infrastructure", "Gitablog.Infrastructure\Gitablog.Infrastructure.csproj", "{660F4F04-B1C4-4240-855F-BA814B128714}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gitablog.BlogContentProcessor.UnitTests", "Gitablog.BlogContentProcessor.UnitTests\Gitablog.BlogContentProcessor.UnitTests.csproj", "{D0CB7754-83E5-4D11-B9DB-63337631DDA8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gitablog.Web.UnitTests", "Gitablog.Web.UnitTests\Gitablog.Web.UnitTests.csproj", "{72090293-1CF7-42F0-8D5F-4F8DDE16398E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gitablog.TestFramework", "Gitablog.TestFramework\Gitablog.TestFramework.csproj", "{CBFB53FF-53EE-48BA-9265-2171607A3BB5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{87D999C1-86BB-40EF-94E2-A4C0833E67A1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,8 +35,25 @@ Global
 		{660F4F04-B1C4-4240-855F-BA814B128714}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{660F4F04-B1C4-4240-855F-BA814B128714}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{660F4F04-B1C4-4240-855F-BA814B128714}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0CB7754-83E5-4D11-B9DB-63337631DDA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0CB7754-83E5-4D11-B9DB-63337631DDA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0CB7754-83E5-4D11-B9DB-63337631DDA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0CB7754-83E5-4D11-B9DB-63337631DDA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72090293-1CF7-42F0-8D5F-4F8DDE16398E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72090293-1CF7-42F0-8D5F-4F8DDE16398E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72090293-1CF7-42F0-8D5F-4F8DDE16398E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72090293-1CF7-42F0-8D5F-4F8DDE16398E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBFB53FF-53EE-48BA-9265-2171607A3BB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBFB53FF-53EE-48BA-9265-2171607A3BB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBFB53FF-53EE-48BA-9265-2171607A3BB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBFB53FF-53EE-48BA-9265-2171607A3BB5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D0CB7754-83E5-4D11-B9DB-63337631DDA8} = {87D999C1-86BB-40EF-94E2-A4C0833E67A1}
+		{72090293-1CF7-42F0-8D5F-4F8DDE16398E} = {87D999C1-86BB-40EF-94E2-A4C0833E67A1}
+		{CBFB53FF-53EE-48BA-9265-2171607A3BB5} = {87D999C1-86BB-40EF-94E2-A4C0833E67A1}
 	EndGlobalSection
 EndGlobal

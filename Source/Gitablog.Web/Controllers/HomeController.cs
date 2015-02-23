@@ -13,7 +13,6 @@ namespace Gitablog.Web.Controllers
     public class HomeController : Controller
     {
         private readonly ContentState _state;
-        private readonly BlogContentEngine _engine;
 
         public HomeController(ContentState state)
         {
@@ -23,7 +22,7 @@ namespace Gitablog.Web.Controllers
 
         public async Task<ActionResult> Index()
         {
-            var layout = _state.State ?? await _state.RequestStateUpdate();
+            var layout = _state.HasState ? _state.State : await _state.RequestStateUpdate();
 
             var pages = ConvertToPages(layout);
 
@@ -32,28 +31,16 @@ namespace Gitablog.Web.Controllers
 
         private Page ConvertToPage(string pageName, IEnumerable<BlogEntry> blogEntries)
         {
-            var page = new Page
+            return new Page
             {
-                Name = pageName
+                Name = pageName,
+                BlogPosts = blogEntries.Select(entry => new BlogPost { RawHtml = entry.RawHtml })
             };
-
-            foreach (var entry in blogEntries)
-            {
-                page.BlogPosts.Add(new BlogPost { RawHtml = entry.RawHtml });
-            }
-
-            return page;
         }
 
         private IEnumerable<Page> ConvertToPages(IEnumerable<KeyValuePair<string, IEnumerable<BlogEntry>>> layout)
         {
-            var pages = new List<Page>();
-
-            foreach (var grp in layout)
-            {
-                pages.Add(ConvertToPage(grp.Key, grp.Value));
-            }
-            return pages;
+            return layout.Select(grp => ConvertToPage(grp.Key, grp.Value));
         }
 
         public async Task<ActionResult> Category(string category)

@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B7A93946-0224-4797-9CE0-44255F304489}</ProjectGuid>
+    <ProjectGuid>{72090293-1CF7-42F0-8D5F-4F8DDE16398E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Gitablog.BlogContentProcessor</RootNamespace>
-    <AssemblyName>Gitablog.BlogContentProcessor</AssemblyName>
+    <RootNamespace>Gitablog.Web.UnitTests</RootNamespace>
+    <AssemblyName>Gitablog.Web.UnitTests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,18 +30,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac">
+      <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+    </Reference>
     <Reference Include="FluentScheduler">
       <HintPath>..\packages\FluentScheduler.3.1.45\lib\net40\FluentScheduler.dll</HintPath>
     </Reference>
-    <Reference Include="MarkdownSharp">
-      <HintPath>..\packages\MarkdownSharp.1.13.0.0\lib\35\MarkdownSharp.dll</HintPath>
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.2.1502.0911\lib\net40\Moq.dll</HintPath>
     </Reference>
-    <Reference Include="Octokit">
-      <HintPath>..\packages\Octokit.0.6.2\lib\net45\Octokit.dll</HintPath>
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,43 +51,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstract\IBlogContentEngine.cs" />
-    <Compile Include="Abstract\IBlogLayoutOrganizer.cs" />
-    <Compile Include="Abstract\IContentLocator.cs" />
-    <Compile Include="Abstract\IContentState.cs" />
-    <Compile Include="Abstract\IFileDownloader.cs" />
-    <Compile Include="Abstract\IGitContentLocatorStrategy.cs" />
-    <Compile Include="Abstract\IGitHubContentLocatorStrategy.cs" />
-    <Compile Include="Abstract\IGitHubRepository.cs" />
-    <Compile Include="Abstract\IMarkdownUtil.cs" />
-    <Compile Include="Abstract\IRawContent.cs" />
-    <Compile Include="Abstract\IStateSynchronizer.cs" />
-    <Compile Include="Abstract\ITimerPoller.cs" />
-    <Compile Include="BlogContentEngine.cs" />
-    <Compile Include="BlogContentValidationException.cs" />
-    <Compile Include="BlogLayoutOrganizer.cs" />
-    <Compile Include="ContentProcessor.cs" />
-    <Compile Include="ContentRetriever.cs" />
-    <Compile Include="ContentLocator.cs" />
-    <Compile Include="ContentState.cs" />
-    <Compile Include="GitHubContentLocatorStrategy.cs" />
-    <Compile Include="GitHubRepository.cs" />
-    <Compile Include="Models\BlogEntry.cs" />
-    <Compile Include="Models\RawContent.cs" />
-    <Compile Include="Models\RawMarkdownContent.cs" />
-    <Compile Include="Models\RemoteMarkdownFile.cs" />
+    <Compile Include="AutofacBootstrapperTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StateSynchronizer.cs" />
-    <Compile Include="Utils\FileDownloader.cs" />
-    <Compile Include="Utils\MarkdownUtil.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Gitablog.Infrastructure\Gitablog.Infrastructure.csproj">
-      <Project>{660F4F04-B1C4-4240-855F-BA814B128714}</Project>
-      <Name>Gitablog.Infrastructure</Name>
+    <ProjectReference Include="..\Gitablog.BlogContentProcessor\Gitablog.BlogContentProcessor.csproj">
+      <Project>{B7A93946-0224-4797-9CE0-44255F304489}</Project>
+      <Name>Gitablog.BlogContentProcessor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gitablog.Web\Gitablog.Web.csproj">
+      <Project>{9F2EA4C3-375F-4E89-8D50-817E473B215F}</Project>
+      <Name>Gitablog.Web</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

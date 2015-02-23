@@ -4,12 +4,13 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using Gitablog.BlogContentProcessor.Abstract;
 using Gitablog.BlogContentProcessor.Models;
 using Gitablog.Infrastructure;
 
 namespace Gitablog.BlogContentProcessor
 {
-    public class ContentState
+    public class ContentState : IContentState
     {
         private readonly IIoC _ioc;
 

@@ -1,6 +1,8 @@
-﻿namespace Gitablog.BlogContentProcessor
+﻿using Gitablog.BlogContentProcessor.Abstract;
+
+namespace Gitablog.BlogContentProcessor
 {
-    class GitHubRepository
+    public class GitHubRepository : IGitHubRepository
     {
         public string Owner { get { return "eaardal"; } }
         public string Name { get { return "mdtest"; }}

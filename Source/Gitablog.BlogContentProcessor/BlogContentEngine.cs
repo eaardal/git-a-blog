@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Gitablog.BlogContentProcessor.Abstract;
 using Gitablog.BlogContentProcessor.Models;
 
 namespace Gitablog.BlogContentProcessor
 {
-    public class BlogContentEngine
+    public class BlogContentEngine : IBlogContentEngine
     {
         private readonly ContentLocator _contentLocator;
         private readonly ContentProcessor _contentProcessor;

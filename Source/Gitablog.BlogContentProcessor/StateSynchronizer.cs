@@ -5,16 +5,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FluentScheduler;
+using Gitablog.BlogContentProcessor.Abstract;
 using Gitablog.BlogContentProcessor.Models;
 
 namespace Gitablog.BlogContentProcessor
 {
-    public class StateSynchronizer : ITask
+    public class StateSynchronizer : ITask, IStateSynchronizer
     {
-        private readonly ContentState _state;
-        private readonly BlogContentEngine _contentEngine;
+        private readonly IContentState _state;
+        private readonly IBlogContentEngine _contentEngine;
 
-        public StateSynchronizer(ContentState state, BlogContentEngine contentEngine) 
+        public StateSynchronizer(IContentState state, IBlogContentEngine contentEngine) 
         {
             if (state == null) throw new ArgumentNullException("state");
             if (contentEngine == null) throw new ArgumentNullException("contentEngine");

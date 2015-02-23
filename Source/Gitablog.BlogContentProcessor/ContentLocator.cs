@@ -1,27 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Gitablog.BlogContentProcessor.Abstract;
 
 namespace Gitablog.BlogContentProcessor
 {
-    public class ContentLocator
+    public class ContentLocator : IContentLocator
     {
-        private readonly IGitContentLocatorStrategy _gitHubContentLocatorStrategy;
+        private readonly IEnumerable<IGitContentLocatorStrategy> _gitContentLocatorStrategies;
 
-        public ContentLocator(IGitContentLocatorStrategy gitHubContentLocatorStrategy)
+        public ContentLocator(IEnumerable<IGitContentLocatorStrategy> gitContentLocatorStrategies)
         {
-            if (gitHubContentLocatorStrategy == null) throw new ArgumentNullException("gitHubContentLocatorStrategy");
-
-            _gitHubContentLocatorStrategy = gitHubContentLocatorStrategy;
+            if (gitContentLocatorStrategies == null) throw new ArgumentNullException("gitContentLocatorStrategies");
+            _gitContentLocatorStrategies = gitContentLocatorStrategies;
         }
 
         public async Task<IEnumerable<IRawContent>> Locate()
         {
-            return new List<IRawContent>
+            var content = new List<IRawContent>();
+
+            foreach (var strategy in _gitContentLocatorStrategies)
             {
-                await _gitHubContentLocatorStrategy.LocateContent()
-            };
+                content.Add(await strategy.LocateContent());
+            }
+
+            return content;
         }
     }
 }

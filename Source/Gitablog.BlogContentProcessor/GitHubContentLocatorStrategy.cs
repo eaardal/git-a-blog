@@ -10,13 +10,13 @@ using Octokit;
 
 namespace Gitablog.BlogContentProcessor
 {
-    class GitHubContentLocatorStrategy : IGitHubContentLocatorStrategy
+    public class GitHubContentLocatorStrategy : IGitHubContentLocatorStrategy
     {
         private const string ProductIdentifier = "Gittablog";
-        private readonly GitHubRepository _repository;
+        private readonly IGitHubRepository _repository;
         private readonly IIoC _ioc;
 
-        public GitHubContentLocatorStrategy(GitHubRepository repository, IIoC ioc)
+        public GitHubContentLocatorStrategy(IGitHubRepository repository, IIoC ioc)
         {
             if (repository == null) throw new ArgumentNullException("repository");
             if (ioc == null) throw new ArgumentNullException("ioc");
