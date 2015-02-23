@@ -11,17 +11,18 @@ namespace Gitablog.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly ContentState _state;
         private readonly BlogContentEngine _engine;
 
-        public HomeController(BlogContentEngine engine)
+        public HomeController(ContentState state)
         {
-            if (engine == null) throw new ArgumentNullException("engine");
-            _engine = engine;
+            if (state == null) throw new ArgumentNullException("state");
+            _state = state;
         }
 
         public async Task<ActionResult> Index()
         {
-            var layout = await _engine.GetBlogContent();
+            var layout = _state.State ?? await _state.RequestStateUpdate();
 
             var pages = new List<Page>();
 
