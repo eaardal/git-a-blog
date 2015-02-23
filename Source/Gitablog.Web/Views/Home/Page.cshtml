@@ -1,0 +1,10 @@
+﻿@model Gitablog.Web.ViewModels.Page
+
+<h1>@Model.Name</h1>
+
+@foreach (var post in @Model.BlogPosts)
+{
+    <span>@Html.Raw(post.RawHtml)</span>
+    <hr/>
+}
+

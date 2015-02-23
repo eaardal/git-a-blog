@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Gitablog.BlogContentProcessor;
+using Gitablog.BlogContentProcessor.Models;
 using Gitablog.Web.ViewModels;
 
 namespace Gitablog.Web.Controllers
@@ -24,24 +25,48 @@ namespace Gitablog.Web.Controllers
         {
             var layout = _state.State ?? await _state.RequestStateUpdate();
 
+            var pages = ConvertToPages(layout);
+
+            return View(new Blog{ Pages = pages });
+        }
+
+        private Page ConvertToPage(string pageName, IEnumerable<BlogEntry> blogEntries)
+        {
+            var page = new Page
+            {
+                Name = pageName
+            };
+
+            foreach (var entry in blogEntries)
+            {
+                page.BlogPosts.Add(new BlogPost { RawHtml = entry.RawHtml });
+            }
+
+            return page;
+        }
+
+        private IEnumerable<Page> ConvertToPages(IEnumerable<KeyValuePair<string, IEnumerable<BlogEntry>>> layout)
+        {
             var pages = new List<Page>();
 
             foreach (var grp in layout)
             {
-                var page = new Page
-                {
-                    Name = grp.Key
-                };
-
-                foreach (var entry in grp.Value)
-                {
-                    page.BlogPosts.Add(new BlogPost { RawHtml = entry.RawHtml });
-                }
-
-                pages.Add(page);
+                pages.Add(ConvertToPage(grp.Key, grp.Value));
             }
+            return pages;
+        }
 
-            return View(pages);
+        public async Task<ActionResult> Category(string category)
+        {
+            var layout = _state.State ?? await _state.RequestStateUpdate();
+            
+            if (layout.ContainsKey(category))
+            {
+                var blogEntries = layout[category];
+
+                return PartialView("Page", ConvertToPage(category, blogEntries));
+            }
+            return RedirectToAction("Index");
         }
     }
 }
