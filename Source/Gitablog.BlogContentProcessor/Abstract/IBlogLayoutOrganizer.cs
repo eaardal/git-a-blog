@@ -5,6 +5,6 @@ namespace Gitablog.BlogContentProcessor.Abstract
 {
     public interface IBlogLayoutOrganizer
     {
-        IDictionary<string, IEnumerable<BlogEntry>> Organize(IEnumerable<BlogEntry> blogEntries);
+        IDictionary<string, IEnumerable<PostDto>> Organize(IEnumerable<PostDto> blogEntries);
     }
 }

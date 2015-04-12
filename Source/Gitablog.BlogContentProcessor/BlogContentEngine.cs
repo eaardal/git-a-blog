@@ -10,31 +10,31 @@ namespace Gitablog.BlogContentProcessor
 {
     public class BlogContentEngine : IBlogContentEngine
     {
-        private readonly ContentLocator _contentLocator;
-        private readonly ContentProcessor _contentProcessor;
-        private readonly ContentRetriever _contentRetriever;
-        private readonly BlogLayoutOrganizer _layoutOrganizer;
+        private readonly IContentLocator _contentLocator;
+        private readonly IBlogPostProcessor _blogPostProcessor;
+        private readonly IContentRetriever _contentRetriever;
+        private readonly IBlogLayoutOrganizer _layoutOrganizer;
 
-        public BlogContentEngine(ContentLocator contentLocator, ContentProcessor contentProcessor, ContentRetriever contentRetriever, BlogLayoutOrganizer layoutOrganizer)
+        public BlogContentEngine(IContentLocator contentLocator, IBlogPostProcessor blogPostProcessor, IContentRetriever contentRetriever, IBlogLayoutOrganizer layoutOrganizer)
         {
             if (contentLocator == null) throw new ArgumentNullException("contentLocator");
-            if (contentProcessor == null) throw new ArgumentNullException("contentProcessor");
+            if (blogPostProcessor == null) throw new ArgumentNullException("blogPostProcessor");
             if (contentRetriever == null) throw new ArgumentNullException("contentRetriever");
             if (layoutOrganizer == null) throw new ArgumentNullException("layoutOrganizer");
 
             _contentLocator = contentLocator;
-            _contentProcessor = contentProcessor;
+            _blogPostProcessor = blogPostProcessor;
             _contentRetriever = contentRetriever;
             _layoutOrganizer = layoutOrganizer;
         }
 
-        public async Task<IDictionary<string, IEnumerable<BlogEntry>>> GetBlogContent()
+        public async Task<IDictionary<string, IEnumerable<PostDto>>> GetBlogContent()
         {
             var rawContents = await _contentLocator.Locate();
 
             var rawMarkdownContents = await _contentRetriever.Retrieve(rawContents);
 
-            var blogEntries = await _contentProcessor.Process(rawMarkdownContents);
+            var blogEntries = await _blogPostProcessor.Process(rawMarkdownContents);
 
             var organized = _layoutOrganizer.Organize(blogEntries);
 

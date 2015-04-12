@@ -6,7 +6,7 @@ using Gitablog.BlogContentProcessor.Models;
 
 namespace Gitablog.BlogContentProcessor
 {
-    public class ContentRetriever
+    public class ContentRetriever : IContentRetriever
     {
         private readonly IFileDownloader _fileDownloader;
 
@@ -16,7 +16,7 @@ namespace Gitablog.BlogContentProcessor
             _fileDownloader = fileDownloader;
         }
 
-        public async Task<IEnumerable<RawMarkdownContent>> Retrieve(IEnumerable<IRawContent> rawContents)
+        public async Task<IEnumerable<RawMarkdownContent>> Retrieve(IEnumerable<IGitPollResult> rawContents)
         {
             var blogEntries = new List<RawMarkdownContent>();
 

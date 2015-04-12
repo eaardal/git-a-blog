@@ -23,10 +23,8 @@ namespace Gitablog.BlogContentProcessor
             _contentEngine = contentEngine;
         }
 
-        public async Task<IDictionary<string, IEnumerable<BlogEntry>>> Synchronize()
+        public async Task<IDictionary<string, IEnumerable<PostDto>>> Synchronize()
         {
-            Debug.WriteLine("Doing StateSynchronizer work");
-
             _state.State = await _contentEngine.GetBlogContent();
 
             return _state.State;

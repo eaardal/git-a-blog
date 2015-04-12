@@ -6,6 +6,6 @@ namespace Gitablog.BlogContentProcessor.Abstract
 {
     public interface IBlogContentEngine
     {
-        Task<IDictionary<string, IEnumerable<BlogEntry>>> GetBlogContent();
+        Task<IDictionary<string, IEnumerable<PostDto>>> GetBlogContent();
     }
 }

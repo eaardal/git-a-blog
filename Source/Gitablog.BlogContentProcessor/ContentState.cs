@@ -18,7 +18,7 @@ namespace Gitablog.BlogContentProcessor
 
         public event StateUpdatedEventHandler StateUpdated;
 
-        public IDictionary<string, IEnumerable<BlogEntry>> State { get; set; }
+        public IDictionary<string, IEnumerable<PostDto>> State { get; set; }
 
         public bool HasState { get { return State != null && State.Keys.Any(); } }
 
@@ -28,9 +28,9 @@ namespace Gitablog.BlogContentProcessor
             _ioc = ioc;
         }
 
-        public async Task<IDictionary<string, IEnumerable<BlogEntry>>> RequestStateUpdate()
+        public async Task<IDictionary<string, IEnumerable<PostDto>>> RequestStateUpdate()
         {
-            var sync = _ioc.Resolve<StateSynchronizer>();
+            var sync = _ioc.Resolve<IStateSynchronizer>();
 
             State = await sync.Synchronize();
 

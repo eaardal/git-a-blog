@@ -5,6 +5,6 @@ namespace Gitablog.BlogContentProcessor.Abstract
 {
     public interface IContentLocator
     {
-        Task<IEnumerable<IRawContent>> Locate();
+        Task<IEnumerable<IGitPollResult>> Locate();
     }
 }

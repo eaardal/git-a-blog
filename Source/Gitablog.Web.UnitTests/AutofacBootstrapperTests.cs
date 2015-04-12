@@ -27,10 +27,10 @@ namespace Gitablog.Web.UnitTests
 
         // Gitablog
         [TestCase(typeof(BlogContentEngine))]
-        [TestCase(typeof(BlogEntry))]
+        [TestCase(typeof(PostDto))]
         [TestCase(typeof(BlogLayoutOrganizer))]
         [TestCase(typeof(ContentLocator))]
-        [TestCase(typeof(ContentProcessor))]
+        [TestCase(typeof(BlogPostProcessor))]
         [TestCase(typeof(ContentRetriever))]
         [TestCase(typeof(ContentState))]
         [TestCase(typeof(FileDownloader))]
@@ -38,7 +38,7 @@ namespace Gitablog.Web.UnitTests
         [TestCase(typeof(GitHubRepository))]
         [TestCase(typeof(IoC))]
         [TestCase(typeof(MarkdownUtil))]
-        [TestCase(typeof(RawContent))]
+        [TestCase(typeof(GitPollResult))]
         [TestCase(typeof(RawMarkdownContent))]
         [TestCase(typeof(RemoteMarkdownFile))]
         [TestCase(typeof(StateSynchronizer))]
@@ -65,16 +65,16 @@ namespace Gitablog.Web.UnitTests
         }
 
         [TestCase(typeof(BlogContentEngine))]
-        [TestCase(typeof(BlogEntry))]
+        [TestCase(typeof(PostDto))]
         [TestCase(typeof(BlogLayoutOrganizer))]
         [TestCase(typeof(ContentLocator))]
-        [TestCase(typeof(ContentProcessor))]
+        [TestCase(typeof(BlogPostProcessor))]
         [TestCase(typeof(ContentRetriever))]
         [TestCase(typeof(FileDownloader))]
         [TestCase(typeof(GitHubContentLocatorStrategy))]
         [TestCase(typeof(GitHubRepository))]
         [TestCase(typeof(MarkdownUtil))]
-        [TestCase(typeof(RawContent))]
+        [TestCase(typeof(GitPollResult))]
         [TestCase(typeof(RawMarkdownContent))]
         [TestCase(typeof(RemoteMarkdownFile))]
         public void ShouldBeInstance(Type service)

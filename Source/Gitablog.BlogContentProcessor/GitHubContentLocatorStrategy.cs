@@ -7,11 +7,13 @@ using Gitablog.BlogContentProcessor.Abstract;
 using Gitablog.BlogContentProcessor.Models;
 using Gitablog.Infrastructure;
 using Octokit;
+using Octokit.Internal;
 
 namespace Gitablog.BlogContentProcessor
 {
     public class GitHubContentLocatorStrategy : IGitHubContentLocatorStrategy
     {
+        private const string ApiToken = "079b22171cd1b3ae67bbab5af21be5880edf05b8";
         private const string ProductIdentifier = "Gittablog";
         private readonly IGitHubRepository _repository;
         private readonly IIoC _ioc;
@@ -24,43 +26,52 @@ namespace Gitablog.BlogContentProcessor
             _ioc = ioc;
         }
 
-        public async Task<IRawContent> LocateContent()
+        public async Task<IGitPollResult> LocateContent()
         {
-            var github = new GitHubClient(new ProductHeaderValue(ProductIdentifier));
+            var github = new GitHubClient(new ProductHeaderValue(ProductIdentifier), new InMemoryCredentialStore(new Credentials(ApiToken)));
             var repository = await github.Repository.Get(_repository.Owner, _repository.Name);
             var pushedTimestamp = repository.PushedAt;
 
-            var rawContent = _ioc.Resolve<IRawContent>();
+            var pollResult = _ioc.Resolve<IGitPollResult>();
 
-            if (!pushedTimestamp.HasValue || !IsNewPush(pushedTimestamp)) return rawContent;
+            if (!pushedTimestamp.HasValue) 
+                return pollResult;
 
-            SetIsNewCommit(rawContent);
+            SetIsNewCommit(pollResult);
 
-            SetPushedTimestamp(rawContent, pushedTimestamp);
+            SetPushedTimestamp(pollResult, pushedTimestamp);
 
             UpdateLastPushTimestamp(pushedTimestamp);
 
-            var lastCommit = await GetLastCommit(_repository.Owner, _repository.Name, github);
-            rawContent.Identifier = lastCommit.Sha;
+            var content = await GetAllFiles(github).ContinueWith(task => task.Result.ToList());
+            
+            if (!content.Any())
+                return pollResult;
 
-            var files = lastCommit.Files;
+            pollResult.MarkdownFiles = content.Where(IsMarkdownFile).Select(file => new RemoteMarkdownFile { Url = file.DownloadUrl.ToString() }).ToList();
 
-            if (!HasFilesToProcess(files)) return rawContent;
-
-            rawContent.MarkdownFiles = files.Where(IsMarkdownFile).Select(file => new RemoteMarkdownFile { Url = file.RawUrl }).ToList();
-
-            return rawContent;
+            return pollResult;
         }
 
-        private static bool IsMarkdownFile(GitHubCommitFile file)
+        private async Task<IEnumerable<RepositoryContent>> GetAllFiles(GitHubClient gitHub)
         {
-            return file.Filename.EndsWith(".md");
+            return await gitHub.Repository.Content.GetContents(_repository.Owner, _repository.Name, "/");
+        }
+
+        private static bool IsMarkdownFile(RepositoryContent content)
+        {
+            return content.Name.EndsWith(".md");
         }
 
         private static bool HasFilesToProcess(IEnumerable<GitHubCommitFile> files)
         {
             return files != null && files.Any();
         }
+
+        private async Task<IEnumerable<GitHubCommit>> GetAllCommits(GitHubClient gitHub)
+        {
+            return await gitHub.Repository.Commits.GetAll(_repository.Owner, _repository.Name);
+        } 
 
         private static async Task<GitHubCommit> GetLastCommit(string owner, string name, GitHubClient github)
         {
@@ -75,13 +86,13 @@ namespace Gitablog.BlogContentProcessor
                 _repository.LastPushedTicks = pushedTimestamp.Value.Ticks;
         }
 
-        private static void SetPushedTimestamp(IRawContent rawContent, DateTimeOffset? pushedTimestamp)
+        private static void SetPushedTimestamp(IGitPollResult rawContent, DateTimeOffset? pushedTimestamp)
         {
             if (pushedTimestamp.HasValue)
                 rawContent.PushedTimestamp = pushedTimestamp.Value;
         }
 
-        private void SetIsNewCommit(IRawContent rawContent)
+        private void SetIsNewCommit(IGitPollResult rawContent)
         {
             if (_repository.LastPushedTicks != 0)
                 rawContent.IsNewCommit = true;

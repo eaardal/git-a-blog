@@ -1,6 +1,6 @@
 ﻿using Moq;
 
-namespace Gitablog.BlogContentProcessor.UnitTests
+namespace Gitablog.TestFramework
 {
     static class MoqExtensions
     {

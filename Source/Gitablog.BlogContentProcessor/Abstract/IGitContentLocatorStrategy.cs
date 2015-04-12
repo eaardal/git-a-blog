@@ -4,6 +4,6 @@ namespace Gitablog.BlogContentProcessor.Abstract
 {
     public interface IGitContentLocatorStrategy
     {
-        Task<IRawContent> LocateContent();
+        Task<IGitPollResult> LocateContent();
     }
 }

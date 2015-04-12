@@ -33,6 +33,9 @@
     <Reference Include="FluentScheduler">
       <HintPath>..\packages\FluentScheduler.3.1.45\lib\net40\FluentScheduler.dll</HintPath>
     </Reference>
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>..\packages\HtmlAgilityPack.1.4.9\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
     <Reference Include="MarkdownSharp">
       <HintPath>..\packages\MarkdownSharp.1.13.0.0\lib\35\MarkdownSharp.dll</HintPath>
     </Reference>
@@ -51,27 +54,30 @@
   <ItemGroup>
     <Compile Include="Abstract\IBlogContentEngine.cs" />
     <Compile Include="Abstract\IBlogLayoutOrganizer.cs" />
+    <Compile Include="Abstract\IBlogPostProcessor.cs" />
     <Compile Include="Abstract\IContentLocator.cs" />
+    <Compile Include="Abstract\IContentRetriever.cs" />
     <Compile Include="Abstract\IContentState.cs" />
     <Compile Include="Abstract\IFileDownloader.cs" />
     <Compile Include="Abstract\IGitContentLocatorStrategy.cs" />
     <Compile Include="Abstract\IGitHubContentLocatorStrategy.cs" />
     <Compile Include="Abstract\IGitHubRepository.cs" />
     <Compile Include="Abstract\IMarkdownUtil.cs" />
-    <Compile Include="Abstract\IRawContent.cs" />
+    <Compile Include="Abstract\IGitPollResult.cs" />
     <Compile Include="Abstract\IStateSynchronizer.cs" />
     <Compile Include="Abstract\ITimerPoller.cs" />
     <Compile Include="BlogContentEngine.cs" />
     <Compile Include="BlogContentValidationException.cs" />
     <Compile Include="BlogLayoutOrganizer.cs" />
-    <Compile Include="ContentProcessor.cs" />
+    <Compile Include="BlogPostProcessor.cs" />
     <Compile Include="ContentRetriever.cs" />
     <Compile Include="ContentLocator.cs" />
     <Compile Include="ContentState.cs" />
     <Compile Include="GitHubContentLocatorStrategy.cs" />
     <Compile Include="GitHubRepository.cs" />
-    <Compile Include="Models\BlogEntry.cs" />
-    <Compile Include="Models\RawContent.cs" />
+    <Compile Include="Models\PageDto.cs" />
+    <Compile Include="Models\PostDto.cs" />
+    <Compile Include="Models\GitPollResult.cs" />
     <Compile Include="Models\RawMarkdownContent.cs" />
     <Compile Include="Models\RemoteMarkdownFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

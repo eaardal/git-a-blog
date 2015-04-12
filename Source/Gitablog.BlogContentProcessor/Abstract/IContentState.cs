@@ -7,8 +7,8 @@ namespace Gitablog.BlogContentProcessor.Abstract
     public interface IContentState
     {
         event ContentState.StateUpdatedEventHandler StateUpdated;
-        IDictionary<string, IEnumerable<BlogEntry>> State { get; set; }
+        IDictionary<string, IEnumerable<PostDto>> State { get; set; }
         bool HasState { get; }
-        Task<IDictionary<string, IEnumerable<BlogEntry>>> RequestStateUpdate();
+        Task<IDictionary<string, IEnumerable<PostDto>>> RequestStateUpdate();
     }
 }

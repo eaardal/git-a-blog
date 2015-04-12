@@ -5,7 +5,7 @@ using Gitablog.BlogContentProcessor.Abstract;
 
 namespace Gitablog.BlogContentProcessor.Models
 {
-    public class RawContent : IRawContent
+    public class GitPollResult : IGitPollResult
     {
         public bool IsNewCommit { get; set; }
         public DateTimeOffset? PushedTimestamp { get; set; }
@@ -19,7 +19,7 @@ namespace Gitablog.BlogContentProcessor.Models
             }
         }
 
-        public RawContent()
+        public GitPollResult()
         {
             MarkdownFiles = new List<RemoteMarkdownFile>();
         }

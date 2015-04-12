@@ -4,7 +4,7 @@ using Gitablog.BlogContentProcessor.Models;
 
 namespace Gitablog.BlogContentProcessor.Abstract
 {
-    public interface IRawContent
+    public interface IGitPollResult
     {
         bool IsNewCommit { get; set; }
         DateTimeOffset? PushedTimestamp { get; set; }

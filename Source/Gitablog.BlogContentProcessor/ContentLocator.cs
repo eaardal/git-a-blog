@@ -16,9 +16,9 @@ namespace Gitablog.BlogContentProcessor
             _gitContentLocatorStrategies = gitContentLocatorStrategies;
         }
 
-        public async Task<IEnumerable<IRawContent>> Locate()
+        public async Task<IEnumerable<IGitPollResult>> Locate()
         {
-            var content = new List<IRawContent>();
+            var content = new List<IGitPollResult>();
 
             foreach (var strategy in _gitContentLocatorStrategies)
             {

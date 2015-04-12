@@ -20,38 +20,43 @@ namespace Gitablog.Web.Controllers
             _state = state;
         }
 
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(bool forceReload = false)
         {
-            var layout = _state.HasState ? _state.State : await _state.RequestStateUpdate();
+            var layout = (_state.HasState && !forceReload) ? _state.State : await _state.RequestStateUpdate();
 
             var pages = ConvertToPages(layout);
 
-            return View(new Blog{ Pages = pages });
+            var blog = new Blog {Pages = pages};
+            ViewBag.Pages = blog.Pages;
+            
+            return View(blog);
         }
 
-        private Page ConvertToPage(string pageName, IEnumerable<BlogEntry> blogEntries)
+        private Page ConvertToPage(string pageName, IEnumerable<PostDto> blogEntries)
         {
             return new Page
             {
                 Name = pageName,
-                BlogPosts = blogEntries.Select(entry => new BlogPost { RawHtml = entry.RawHtml })
+                BlogPosts = blogEntries.Select(entry => new Post { RawHtml = entry.RawHtml })
             };
         }
 
-        private IEnumerable<Page> ConvertToPages(IEnumerable<KeyValuePair<string, IEnumerable<BlogEntry>>> layout)
+        private IEnumerable<Page> ConvertToPages(IEnumerable<KeyValuePair<string, IEnumerable<PostDto>>> layout)
         {
             return layout.Select(grp => ConvertToPage(grp.Key, grp.Value));
         }
 
-        public async Task<ActionResult> Category(string category)
+        public async Task<ActionResult> Page(string pageName, bool forceReload = false)
         {
-            var layout = _state.State ?? await _state.RequestStateUpdate();
-            
-            if (layout.ContainsKey(category))
-            {
-                var blogEntries = layout[category];
+            var layout = (_state.HasState && !forceReload) ? _state.State : await _state.RequestStateUpdate();
 
-                return PartialView("Page", ConvertToPage(category, blogEntries));
+            if (!string.IsNullOrEmpty(pageName) && layout.ContainsKey(pageName))
+            {
+                var blogEntries = layout[pageName];
+
+                ViewBag.Pages = ConvertToPages(layout);
+
+                return PartialView("Page", ConvertToPage(pageName, blogEntries));
             }
             return RedirectToAction("Index");
         }

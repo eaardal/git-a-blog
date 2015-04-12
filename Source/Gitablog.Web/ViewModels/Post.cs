@@ -2,7 +2,7 @@
 
 namespace Gitablog.Web.ViewModels
 {
-    public class BlogPost
+    public class Post
     {
         public string RawHtml { get; set; }
     }

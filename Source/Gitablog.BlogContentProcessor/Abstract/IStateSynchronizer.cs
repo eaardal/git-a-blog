@@ -6,6 +6,6 @@ namespace Gitablog.BlogContentProcessor.Abstract
 {
     public interface IStateSynchronizer
     {
-        Task<IDictionary<string, IEnumerable<BlogEntry>>> Synchronize();
+        Task<IDictionary<string, IEnumerable<PostDto>>> Synchronize();
     }
 }

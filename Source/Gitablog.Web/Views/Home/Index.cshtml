@@ -1,21 +1,14 @@
-﻿@model Gitablog.Web.ViewModels.Blog
+﻿@using System.Collections.Specialized
+@model Gitablog.Web.ViewModels.Blog
+
 @{
-    Layout = null;
+    Layout = "~/Views/_Layout.cshtml";
 }
 
-<!DOCTYPE html>
+<h3>Index</h3>
 
-<html>
-<head>
-    <title>Git a blog</title>
-</head>
-<body>
-    <div>
-        @foreach (var page in @Model.Pages)
-        {
-            @Html.ActionLink(page.Name, "Category", "Home", new { category = page.Name }, new object())
-            <br/>
-        }
-    </div>
-</body>
-</html>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vitae lorem ultricies, fermentum orci et, suscipit lacus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Praesent bibendum ante sit amet luctus ornare. Nunc feugiat augue eget nisi viverra, quis sollicitudin ipsum lobortis. Vivamus placerat enim vitae suscipit ultricies. Morbi molestie sagittis arcu, sed gravida lorem feugiat vitae. Morbi turpis sem, placerat non dignissim id, luctus eu dolor. Integer interdum luctus tempus. Aenean sapien augue, tempor vel sodales non, tempus vel sem. In dapibus, sem eget finibus imperdiet, neque lorem sodales diam, sed varius ipsum nibh id elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+
+<p>Integer ac ipsum lacinia, euismod nulla et, semper justo. Donec eu arcu massa. Duis ut lorem ligula. Aliquam efficitur sem ac lacinia efficitur. Nullam vehicula lobortis fringilla. In vel ex nec urna faucibus placerat eu at ante. Praesent orci sapien, ultricies ut dolor sed, congue facilisis massa. Fusce tempor nisl ut tempor elementum. Phasellus varius et turpis sed cursus. Donec ac neque sed lectus viverra porta ut eget ex. Fusce condimentum tortor nec nunc varius dictum. Ut euismod, diam imperdiet dignissim sodales, enim erat tristique leo, aliquet venenatis nulla ex ac est. Aliquam posuere augue ac risus ultrices molestie. Cras turpis arcu, hendrerit ut maximus sed, posuere sit amet sem. Aliquam erat volutpat. Sed tincidunt ligula gravida felis feugiat dictum.</p>
+
+<p>Sed at sem erat. Cras laoreet elit in ex imperdiet, a sagittis tellus efficitur. Curabitur quis sapien efficitur, elementum tellus ut, ultrices magna. Pellentesque semper nulla sit amet purus iaculis, sed dictum dolor condimentum. Nam ornare risus at orci varius, a sodales libero viverra. Nam id magna nibh. Sed molestie bibendum aliquam. Vestibulum et facilisis elit. Praesent tellus lectus, lacinia at risus sit amet, scelerisque mattis orci. Suspendisse interdum quam eget sodales tincidunt. Quisque auctor nisi massa, et tincidunt leo vehicula in. Cras non ante pretium, cursus nisl et, hendrerit eros. Mauris tincidunt orci a nulla sagittis rhoncus. Integer sapien metus, interdum ac pellentesque ac, malesuada ac sem. Praesent eros enim, mollis ut porttitor et, consequat non nulla. Phasellus vel elit enim.</p>

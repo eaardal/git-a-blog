@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Gitablog.BlogContentProcessor.Abstract;
+using Gitablog.TestFramework;
 using Moq;
 
 namespace Gitablog.BlogContentProcessor.UnitTests.Fixtures

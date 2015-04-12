@@ -49,8 +49,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Fixtures\StateSynchronizerTestFixture.cs" />
-    <Compile Include="ITestFixture.cs" />
-    <Compile Include="MoqExtensions.cs" />
     <Compile Include="StateSynchronizerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -61,6 +59,10 @@
     <ProjectReference Include="..\Gitablog.BlogContentProcessor\Gitablog.BlogContentProcessor.csproj">
       <Project>{B7A93946-0224-4797-9CE0-44255F304489}</Project>
       <Name>Gitablog.BlogContentProcessor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gitablog.TestFramework\Gitablog.TestFramework.csproj">
+      <Project>{CBFB53FF-53EE-48BA-9265-2171607A3BB5}</Project>
+      <Name>Gitablog.TestFramework</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

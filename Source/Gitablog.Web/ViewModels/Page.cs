@@ -8,11 +8,11 @@ namespace Gitablog.Web.ViewModels
     public class Page
     {
         public string Name { get; set; }
-        public IEnumerable<BlogPost> BlogPosts { get; set; }
+        public IEnumerable<Post> BlogPosts { get; set; }
 
         public Page()
         {
-            BlogPosts = new List<BlogPost>();
+            BlogPosts = new List<Post>();
         }
     }
 }
