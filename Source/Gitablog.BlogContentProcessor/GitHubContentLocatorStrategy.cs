@@ -13,8 +13,8 @@ namespace Gitablog.BlogContentProcessor
 {
     public class GitHubContentLocatorStrategy : IGitHubContentLocatorStrategy
     {
-        private const string ApiToken = "079b22171cd1b3ae67bbab5af21be5880edf05b8";
-        private const string ProductIdentifier = "Gittablog";
+        private readonly string _apiKey;
+        private const string ProductIdentifier = "gitablog";
         private readonly IGitHubRepository _repository;
         private readonly IIoC _ioc;
 
@@ -24,11 +24,12 @@ namespace Gitablog.BlogContentProcessor
             if (ioc == null) throw new ArgumentNullException("ioc");
             _repository = repository;
             _ioc = ioc;
+            _apiKey = Environment.GetEnvironmentVariable("Gitablog.ApiKey");
         }
 
         public async Task<IGitPollResult> LocateContent()
         {
-            var github = new GitHubClient(new ProductHeaderValue(ProductIdentifier), new InMemoryCredentialStore(new Credentials(ApiToken)));
+            var github = new GitHubClient(new ProductHeaderValue(ProductIdentifier), new InMemoryCredentialStore(new Credentials(_apiKey)));
             var repository = await github.Repository.Get(_repository.Owner, _repository.Name);
             var pushedTimestamp = repository.PushedAt;
 
